@@ -11533,5 +11533,1137 @@
     "facilitatorNotes": "EMS protests, demonstrations, referrals, and evacuation.",
     "score": 1,
     "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-001",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "As a First Aider, you are called to assist a colleague who has just cut his finger and is bleeding profusely. What should you do first?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Immediately call for further help and keep reassuring the casualty"
+      },
+      {
+        "key": "B",
+        "text": "Wash the wound with clean water to wipe off blood clots then apply direct pressure"
+      },
+      {
+        "key": "C",
+        "text": "Wait for the first aid kit for gloves so that you do not put yourself in danger"
+      },
+      {
+        "key": "D",
+        "text": "Ask the casualty to apply pressure to the wound was you await the first aid kit"
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-002",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "All unconscious medically ill casualties should be placed in which position?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Face down"
+      },
+      {
+        "key": "B",
+        "text": "Recovery position"
+      },
+      {
+        "key": "C",
+        "text": "As they are found, without moving them"
+      },
+      {
+        "key": "D",
+        "text": "On their back, facing up"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-003",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "To clear the airway of the medically ill casualty,",
+    "options": [
+      {
+        "key": "A",
+        "text": "Lift chin up and head sideways"
+      },
+      {
+        "key": "B",
+        "text": "Push chin down, tilt head forward"
+      },
+      {
+        "key": "C",
+        "text": "Tilt head back, lift chin up"
+      },
+      {
+        "key": "D",
+        "text": "Tilt head forward, lift chin up"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-004",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "You are called to respond to a casualty who has been cut with a knife and blood is spurting from his arm. After applying pressure, the bleeding continues. What should you do next?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Wash the wound to debride it the bandage it."
+      },
+      {
+        "key": "B",
+        "text": "Remove the first pad and apply another one"
+      },
+      {
+        "key": "C",
+        "text": "Add a pad on top of the initial one and apply more pressure"
+      },
+      {
+        "key": "D",
+        "text": "Put ice above the bleeding wound and apply indirect pressure"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-005",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "A child has been hit by a motorbike. The child looks pale and feels cold and clammy. The first aider should",
+    "options": [
+      {
+        "key": "A",
+        "text": "Reassure him and lay him flat"
+      },
+      {
+        "key": "B",
+        "text": "Lay him down and elevate legs if there are no fractures"
+      },
+      {
+        "key": "C",
+        "text": "Put his head in between your feet"
+      },
+      {
+        "key": "D",
+        "text": "Elevate his limbs and put ice on his head"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-006",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "The aim of secondary assessment is to",
+    "options": [
+      {
+        "key": "A",
+        "text": "Transport the person to the hospital"
+      },
+      {
+        "key": "B",
+        "text": "Check airway, breathing and circulation"
+      },
+      {
+        "key": "C",
+        "text": "Check the body for identification"
+      },
+      {
+        "key": "D",
+        "text": "Find any other injuries or signs"
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-007",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "A child has had a pot of boiling water fall on his legs and groin. What should the first aider do first?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Apply toothpaste quickly to the burned area"
+      },
+      {
+        "key": "B",
+        "text": "Apply traditional leaves to the burnt area"
+      },
+      {
+        "key": "C",
+        "text": "Apply running water to the burnt area for 10 minutes"
+      },
+      {
+        "key": "D",
+        "text": "Apply ice to the burned area"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-008",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "A passenger has fallen from a bike and his leg looks deformed and swollen. He appears in lots of pain. The First aider should",
+    "options": [
+      {
+        "key": "A",
+        "text": "Straighten the broken limb and apply a splint"
+      },
+      {
+        "key": "B",
+        "text": "Give him pain relief medication"
+      },
+      {
+        "key": "C",
+        "text": "Ask him to walk to the nearest health post"
+      },
+      {
+        "key": "D",
+        "text": "Immobilize the limb in the most comfortable position"
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-009",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "A mechanic is draining petrol from a car tank using his mouth. He accidentally swallows some petrol and is now complaining of a burning sensation. The First aider should",
+    "options": [
+      {
+        "key": "A",
+        "text": "Give him ipecac or activated charcoal as an antidote then transport to hospital urgently"
+      },
+      {
+        "key": "B",
+        "text": "Give him a glass of water to swash and spit and then milk to drink"
+      },
+      {
+        "key": "C",
+        "text": "Make him to vomit by using raw eggs before giving him some milk to neutralize the petrol"
+      },
+      {
+        "key": "D",
+        "text": "Give him nothing to drink or eat but monitor him while awaiting to transport him to hospital"
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-010",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "A child suffering from asthma suddenly has difficulty to breath after a dust storm. The breathing is noisy. The First aider should",
+    "options": [
+      {
+        "key": "A",
+        "text": "Reassure him and send him home quickly"
+      },
+      {
+        "key": "B",
+        "text": "Give a cool drink and keep the fan running"
+      },
+      {
+        "key": "C",
+        "text": "Assist him to take his inhaler (if available)"
+      },
+      {
+        "key": "D",
+        "text": "Place him in a hot room"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-011",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "A conscious casualty, with history of diabetes mellitus appears confused, irritable and is sweating a lot. The First aider should",
+    "options": [
+      {
+        "key": "A",
+        "text": "Lay him down and raise his feet"
+      },
+      {
+        "key": "B",
+        "text": "Ask him to go to a nearby clinic for assistance"
+      },
+      {
+        "key": "C",
+        "text": "Give him a glass of fruit juice"
+      },
+      {
+        "key": "D",
+        "text": "Put him under a shed so he can recover"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-012",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "A village council elder starts to complain of severe chest pain after walking to the meeting. He has a tight feeling in the chest and is short of breath. The First aider should",
+    "options": [
+      {
+        "key": "A",
+        "text": "Ask him to take deep breaths and keep walking slowly"
+      },
+      {
+        "key": "B",
+        "text": "Give him cool water to drink"
+      },
+      {
+        "key": "C",
+        "text": "Lie him down with his legs elevated"
+      },
+      {
+        "key": "D",
+        "text": "Ask him to sit and rest quietly as he awaits to go to hospital"
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-013",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "When lifting heavy loads, workers should be instructed to",
+    "options": [
+      {
+        "key": "A",
+        "text": "Bend their knees"
+      },
+      {
+        "key": "B",
+        "text": "Bend their backs"
+      },
+      {
+        "key": "C",
+        "text": "Protect their home cloths from dust"
+      },
+      {
+        "key": "D",
+        "text": "Lift more than 50kgs over their shoulders"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-014",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "A worker has been splashed with some chemical which is burning his body. The First aider should",
+    "options": [
+      {
+        "key": "A",
+        "text": "Cover the burn with a blanket"
+      },
+      {
+        "key": "B",
+        "text": "Flood the burning area with lots of water"
+      },
+      {
+        "key": "C",
+        "text": "Remove the sticking burned clothing from the body"
+      },
+      {
+        "key": "D",
+        "text": "Ask the worker to take deep breaths"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-015",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "A woman has slipped on spilled water and sprained her ankle. The First aider should",
+    "options": [
+      {
+        "key": "A",
+        "text": "Rub the area with liniment"
+      },
+      {
+        "key": "B",
+        "text": "Apply ice , ask her to sit and elevate the limb"
+      },
+      {
+        "key": "C",
+        "text": "Ask her to walk around gently to increase blood flow"
+      },
+      {
+        "key": "D",
+        "text": "Place the affected limb in warm water"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-016",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "A woman in the second stage of labor will have which of the following signs?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Crowning, urge to push"
+      },
+      {
+        "key": "B",
+        "text": "Waters breaking, some abdominal pain"
+      },
+      {
+        "key": "C",
+        "text": "Delivery of the baby and placenta"
+      },
+      {
+        "key": "D",
+        "text": "Vaginal bleeding, lower back-pain"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-017",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "An arm sling is used for which fracture:-",
+    "options": [
+      {
+        "key": "A",
+        "text": "Rib"
+      },
+      {
+        "key": "B",
+        "text": "Lower leg"
+      },
+      {
+        "key": "C",
+        "text": "Collar bone"
+      },
+      {
+        "key": "D",
+        "text": "Wrist"
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-018",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "First aiders are commonly asked to provide assistance during mass casualty incidents. What is their first responsibility?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Perform triage"
+      },
+      {
+        "key": "B",
+        "text": "Assess the incident"
+      },
+      {
+        "key": "C",
+        "text": "Provide life-saving interventions"
+      },
+      {
+        "key": "D",
+        "text": "Call for further assistance"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-019",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "While at a party, a middle aged man starts to chock and seems to be effectively coughing. The first aider should,",
+    "options": [
+      {
+        "key": "A",
+        "text": "Quickly offer to assist by providing Heimlich\u2019s maneuver"
+      },
+      {
+        "key": "B",
+        "text": "Reassure the casualty and encourage him to keep coughing"
+      },
+      {
+        "key": "C",
+        "text": "Call for more help as there is not much one can do"
+      },
+      {
+        "key": "D",
+        "text": "Assess the airway to determine if the object can be removed"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-020",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "A gardener has been bitten by a snake on the ankle. The First aider should",
+    "options": [
+      {
+        "key": "A",
+        "text": "Wrap the entire extremity with an elastic bandage"
+      },
+      {
+        "key": "B",
+        "text": "Apply a tourniquet above the ankle"
+      },
+      {
+        "key": "C",
+        "text": "Reassure him and apply a compression bandage at the ankle"
+      },
+      {
+        "key": "D",
+        "text": "S plint the limb and apply a compression bandage on the whole limb"
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-021",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "Following suspected cervical spine (neck) injuries, first aiders should",
+    "options": [
+      {
+        "key": "A",
+        "text": "Gently immobilize the head and neck using sand bags or improvised blocks"
+      },
+      {
+        "key": "B",
+        "text": "Have the injured person sit upright and remain as still as possible"
+      },
+      {
+        "key": "C",
+        "text": "Call EMS only if the casualty is complaining of neck pain"
+      },
+      {
+        "key": "D",
+        "text": "Assess the airway using head-tilt, chin lift maneuver"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-022",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "The immediate first care for casualties with suspected concussion is",
+    "options": [
+      {
+        "key": "A",
+        "text": "Call for an ambulance or have the person transported to hospital"
+      },
+      {
+        "key": "B",
+        "text": "Thoroughly assess the casualty to determine signs and symptoms of a concussion"
+      },
+      {
+        "key": "C",
+        "text": "Place the casualty in a recovery position"
+      },
+      {
+        "key": "D",
+        "text": "Leave the casualty alone as nothing can be done about the injury"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-023",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "The recommended first aid management for an open chest wound include",
+    "options": [
+      {
+        "key": "A",
+        "text": "Avoid complete sealing of the wound e.g with an occlusive dressing"
+      },
+      {
+        "key": "B",
+        "text": "Aggressive management of bleeding using pressure dressing"
+      },
+      {
+        "key": "C",
+        "text": "Active wound packing with large dressings with or without pressure"
+      },
+      {
+        "key": "D",
+        "text": "Application of a petroleum gauze or improvised petroleum dressing"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-024",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "Civilian first aiders can safely use tourniquets",
+    "options": [
+      {
+        "key": "A",
+        "text": "For all extremity injuries with severe limb bleeding"
+      },
+      {
+        "key": "B",
+        "text": "W hen direct pressure can not stop severe external limb bleeding"
+      },
+      {
+        "key": "C",
+        "text": "With minimal training for wilderness first aid"
+      },
+      {
+        "key": "D",
+        "text": "Only under the guidance of Emergency Medical Services"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-025",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "The recommended First aid management for external bleeding includes the all the following",
+    "options": [
+      {
+        "key": "A",
+        "text": "Cold therapy with or without pressure, direct pressure"
+      },
+      {
+        "key": "B",
+        "text": "Direct pressure with Cold therapy, Extremity elevation"
+      },
+      {
+        "key": "C",
+        "text": "Direct pressure, Extremity elevation, Indirect pressure"
+      },
+      {
+        "key": "D",
+        "text": "Direct pressure with or without a dressing, use of hemostatic dressings"
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-026",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "An athlete has been found lying down after exhaustion and dehydration. The recommended first aid is",
+    "options": [
+      {
+        "key": "A",
+        "text": "Sit the casualty down and offer plain water"
+      },
+      {
+        "key": "B",
+        "text": "Sit the casualty under the shade, offer Oral rehydration Salt (ORS)"
+      },
+      {
+        "key": "C",
+        "text": "Call for an ambulance as there is nothing you can do"
+      },
+      {
+        "key": "D",
+        "text": "Ask the athlete to \u2018warm up\u2019 as this is expected and short lasting"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-027",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "Severe anaphylaxis is a common occurrence that requires first aiders to",
+    "options": [
+      {
+        "key": "A",
+        "text": "Promptly recognize it and assist in giving Epipen"
+      },
+      {
+        "key": "B",
+        "text": "Only transport the casualty to hospital"
+      },
+      {
+        "key": "C",
+        "text": "Educate the community on possible home remedies to use"
+      },
+      {
+        "key": "D",
+        "text": "Remind the \u2018potential casualties\u2019 that the problem is always fatal"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-028",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "The recommended dose of Aspirin for a casualty experiencing acute chest pain is",
+    "options": [
+      {
+        "key": "A",
+        "text": "1-2 adult tablets, to be chewed"
+      },
+      {
+        "key": "B",
+        "text": "1 paediatric tablet to be chewed"
+      },
+      {
+        "key": "C",
+        "text": "1 adult tablet to be swallowed whole"
+      },
+      {
+        "key": "D",
+        "text": "3 adult tablets to be placed under the tongue"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-029",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "To recognize stroke, A in FASST stands for",
+    "options": [
+      {
+        "key": "A",
+        "text": "Alert"
+      },
+      {
+        "key": "B",
+        "text": "Ample history"
+      },
+      {
+        "key": "C",
+        "text": "Arm drift"
+      },
+      {
+        "key": "D",
+        "text": "Airway"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-030",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "The optimal first aid position for managing shock is",
+    "options": [
+      {
+        "key": "A",
+        "text": "Upright position with legs placed in alignment"
+      },
+      {
+        "key": "B",
+        "text": "Supine position with passive leg raising for a few minutes"
+      },
+      {
+        "key": "C",
+        "text": "Recovery position with the head tilted to the right side"
+      },
+      {
+        "key": "D",
+        "text": "The most comfortable position for the casualty"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-031",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "The correct management of an unresponsive casualty with normal breathing and without suspicion of trauma is",
+    "options": [
+      {
+        "key": "A",
+        "text": "Modified high arm in endangered spine (HAINES)"
+      },
+      {
+        "key": "B",
+        "text": "A lateral side-lying recovery position"
+      },
+      {
+        "key": "C",
+        "text": "Supine position with head tilted to the left or right side"
+      },
+      {
+        "key": "D",
+        "text": "Leaving the casualty in the position one finds them in"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-032",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "The following is not an indication for CPR",
+    "options": [
+      {
+        "key": "A",
+        "text": "All casualties with presumed cardiac arrest where one is unable to verify pulse check"
+      },
+      {
+        "key": "B",
+        "text": "All candidates who are unresponsive with no breathing"
+      },
+      {
+        "key": "C",
+        "text": "All candidates who are unresponsive with abnormal breathing"
+      },
+      {
+        "key": "D",
+        "text": "All unconscious casualties with severe spinal and head injury"
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-033",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "The correct rate of Chest compression in infants is",
+    "options": [
+      {
+        "key": "A",
+        "text": "At least 100 compressions per minute"
+      },
+      {
+        "key": "B",
+        "text": "60 compressions per minute"
+      },
+      {
+        "key": "C",
+        "text": "100-120 compressions per minute"
+      },
+      {
+        "key": "D",
+        "text": "30 compressions per minute"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-034",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "Bystanders should perform chest compressions for all casualties in cardiac arrest and only consider giving rescue breaths if they are willing to do so. This is because rescue breaths are not always mandatory. Indicate whether the statement is true or false.",
+    "options": [
+      {
+        "key": "A",
+        "text": "True"
+      },
+      {
+        "key": "B",
+        "text": "False"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-035",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "Unconscious chocking adults can be safely managed with abdominal thrusts, if they are delivered effectively in between the navel and the point where the ribs meet (xiphisternum) Indicate whether the statement is true or false.",
+    "options": [
+      {
+        "key": "A",
+        "text": "True"
+      },
+      {
+        "key": "B",
+        "text": "False"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-036",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "Snake bites are a rear event, but potentially life-threatening. First aiders should splint the bitten limb and apply a constrictive bandage before activating rapid transport to hospital Indicate whether the statement is true or false.",
+    "options": [
+      {
+        "key": "A",
+        "text": "True"
+      },
+      {
+        "key": "B",
+        "text": "False"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-037",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "Casualties rescued from drowning and submersion should be placed in supine position (lying facing up) so as to quickly assess for signs of life. If there are signs of life, they can be safely maintained in the same position as long as possible. Compression of the abdomen (stomach) is not necessary. Indicate whether the statement is true or false.",
+    "options": [
+      {
+        "key": "A",
+        "text": "True"
+      },
+      {
+        "key": "B",
+        "text": "False"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-038",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "Concerning an AED,",
+    "options": [
+      {
+        "key": "A",
+        "text": "Is used on casualties in cardiac arrest after 2 minutes of CPR"
+      },
+      {
+        "key": "B",
+        "text": "Should be used in arrest without regard to CPR"
+      },
+      {
+        "key": "C",
+        "text": "It will only shock when shocking is necessary"
+      },
+      {
+        "key": "D",
+        "text": "It should never be used in children"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-039",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "A student has been hit in the mouth and a tooth was knocked out. You should",
+    "options": [
+      {
+        "key": "A",
+        "text": "Control the bleeding and have student bite down on a rolled sterile dressing in the space left by the tooth."
+      },
+      {
+        "key": "B",
+        "text": "Save the tooth by placing it in milk or water."
+      },
+      {
+        "key": "C",
+        "text": "Wrap the tooth in a dry tissue and give to student to take to dentist."
+      },
+      {
+        "key": "D",
+        "text": "Encourage the student to keep spitting so as not to swallow blood."
+      },
+      {
+        "key": "E",
+        "text": "Both A and B"
+      }
+    ],
+    "correctAnswer": "E",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
+  },
+  {
+    "id": "OFA-2019-040",
+    "topic": "EMS",
+    "difficulty": "Medium",
+    "question": "You have a casualty who is not breathing but has injuries to face that prevent you from performing mouth-to-mouth. What do you do?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Wait for the ambulance as you can not do anything in the meantime"
+      },
+      {
+        "key": "B",
+        "text": "Use an improvised device such as a handkerchief as a barrier"
+      },
+      {
+        "key": "C",
+        "text": "Continue to give rescue breaths anyway as you are trained to save life"
+      },
+      {
+        "key": "D",
+        "text": "Continue with Compression only Resuscitation at rate of 100-120 per minute"
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": "Imported from Version 2019 OFA Examination answer key.",
+    "facilitatorNotes": "OFA Examination Version 2019.",
+    "score": 1,
+    "bonusScore": 0
   }
 ]
