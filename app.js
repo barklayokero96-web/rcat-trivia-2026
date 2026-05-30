@@ -1,11 +1,11 @@
 const CONFIG = {
   questionsPerQuiz: 5,
-  secondsPerQuestion: 20,
+  secondsPerQuestion: 45,
   adminCode: "RCAT2026",
   storageKey: "rcat-weekly-attempts",
   activeStorageKey: "rcat-active-participants",
   weeklySetStorageKey: "rcat-weekly-question-sets",
-  activeWindowSeconds: 20,
+  activeWindowSeconds: 40,
 };
 
 const state = {
