@@ -1,6 +1,6 @@
 const CONFIG = {
   questionsPerQuiz: 5,
-  secondsPerQuestion: 10,
+  secondsPerQuestion: 20,
   adminCode: "RCAT2026",
   storageKey: "rcat-weekly-attempts",
   activeStorageKey: "rcat-active-participants",
@@ -176,13 +176,15 @@ function publicQuizUrl() {
 }
 
 function setRoute(route) {
+  const publicOnly = route !== "admin";
+  route = publicOnly ? "quiz" : "admin";
+
   state.route = route;
   location.hash = route;
   document.body.classList.toggle("public-quiz", route === "quiz");
   $$(".view").forEach((view) => view.classList.remove("active"));
   $(`#${route}View`)?.classList.add("active");
   if (route === "quiz") resetQuizEntry();
-  if (route === "home") renderHome();
   if (route === "admin") renderAdmin();
 }
 
