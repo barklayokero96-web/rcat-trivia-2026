@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KRCS Nairobi County Branch RCAT Trivia</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <img src="./krcs-logo.jpeg" alt="Kenya Red Cross 60 years logo" />
+        <div>
+          <p class="eyebrow">Kenya Red Cross Society</p>
+          <h1>KRCS Nairobi County Branch RCAT Trivia</h1>
+        </div>
+      </div>
+      <nav aria-label="Primary">
+        <button class="nav-button" data-route="home">Quiz Link</button>
+        <button class="nav-button" data-route="quiz">Start Quiz</button>
+        <button class="nav-button" data-route="admin">Admin</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="homeView" class="view active">
+        <div class="hero">
+          <div class="hero-copy">
+            <img class="hero-logo" src="./krcs-logo.jpeg" alt="Kenya Red Cross 60 years logo" />
+            <p class="eyebrow">Public weekly challenge</p>
+            <h2>Five fast RCAT questions. Ten seconds each. Fresh mix every attempt.</h2>
+            <p>
+              Participants enter their name, receive five questions selected from different response topics,
+              and are ranked by score, completion time, and submission time.
+            </p>
+            <div class="actions">
+              <button class="primary" data-route="quiz">Open Public Quiz</button>
+              <button class="secondary" id="copyPublicLink">Copy Public Link</button>
+            </div>
+            <p class="link-preview" id="publicLink"></p>
+          </div>
+          <div class="weekly-panel">
+            <div class="panel-header">
+              <span>This Week</span>
+              <strong id="weekLabel">Week</strong>
+            </div>
+            <div class="metric-grid">
+              <div><strong id="questionCount">0</strong><span>Questions</span></div>
+              <div><strong id="topicCount">0</strong><span>Topics</span></div>
+              <div><strong id="attemptCount">0</strong><span>Attempts</span></div>
+            </div>
+            <h3>Top Three</h3>
+            <ol id="publicLeaderboard" class="leaderboard"></ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="quizView" class="view">
+        <div class="quiz-shell">
+          <form id="participantForm" class="participant-card">
+            <img class="form-logo" src="./krcs-logo.jpeg" alt="Kenya Red Cross 60 years logo" />
+            <p class="eyebrow">Participant entry</p>
+            <h2>KRCS Nairobi County Branch RCAT Trivia</h2>
+            <label>
+              Full name
+              <input id="fullName" name="fullName" autocomplete="name" required maxlength="80" />
+            </label>
+            <label>
+              Cluster Office
+              <input id="clusterOffice" name="clusterOffice" required maxlength="80" />
+            </label>
+            <button class="primary" type="submit">Start 5-Question Quiz</button>
+          </form>
+
+          <div id="questionPanel" class="question-panel hidden" aria-live="polite">
+            <div class="quiz-meta">
+              <span id="progressText">Question 1 of 5</span>
+              <span id="topicPill">Topic</span>
+              <strong id="timer">10</strong>
+            </div>
+            <div class="progress-track"><div id="progressBar"></div></div>
+            <h2 id="questionText"></h2>
+            <div id="answerButtons" class="answer-grid"></div>
+          </div>
+
+          <div id="resultPanel" class="result-panel hidden">
+            <p class="eyebrow">Submitted</p>
+            <h2 id="resultTitle">Score</h2>
+            <p id="resultDetail"></p>
+            <div id="reviewList" class="review-list"></div>
+            <div class="actions">
+              <button class="primary" data-route="quiz">Take Another Quiz</button>
+              <button class="secondary" data-route="home">View Leaderboard</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="adminView" class="view">
+        <div id="adminGate" class="admin-gate">
+          <form id="adminLogin" class="participant-card">
+            <p class="eyebrow">Admin portal</p>
+            <h2>Reports and rankings</h2>
+            <label>
+              Access code
+              <input id="adminCode" type="password" autocomplete="current-password" placeholder="RCAT2026" />
+            </label>
+            <button class="primary" type="submit">Open Dashboard</button>
+          </form>
+        </div>
+
+        <div id="adminDashboard" class="admin-dashboard hidden">
+          <div class="dashboard-head">
+            <div>
+              <p class="eyebrow">Weekly operations view</p>
+              <h2>Participant Performance</h2>
+            </div>
+            <div class="actions">
+              <button class="secondary" id="downloadCsv">Download CSV</button>
+              <button class="danger" id="resetWeek">Reset Week & Questions</button>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div><span>Total attempts</span><strong id="adminAttempts">0</strong></div>
+            <div><span>Currently answering</span><strong id="activeParticipants">0</strong></div>
+            <div><span>Average score</span><strong id="averageScore">0</strong></div>
+            <div><span>Fastest time</span><strong id="fastestTime">0s</strong></div>
+            <div><span>Best score</span><strong id="bestScore">0/5</strong></div>
+          </div>
+          <div class="dashboard-grid">
+            <section>
+              <h3>Top Three Participants</h3>
+              <ol id="adminTopThree" class="leaderboard"></ol>
+            </section>
+            <section>
+              <h3>Participating Cluster Offices</h3>
+              <div id="officeReport" class="topic-report"></div>
+            </section>
+          </div>
+          <div class="dashboard-grid">
+            <section>
+              <h3>This Week's Question Set</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Question</th>
+                      <th>Topic</th>
+                      <th>Correct answer</th>
+                    </tr>
+                  </thead>
+                  <tbody id="weeklyQuestionRows"></tbody>
+                </table>
+              </div>
+            </section>
+            <section>
+              <h3>Topic Accuracy</h3>
+              <div id="topicReport" class="topic-report"></div>
+            </section>
+          </div>
+          <section>
+            <h3>Question Performance This Week</h3>
+            <div class="question-summary">
+              <div>
+                <span>Most passed question</span>
+                <strong id="mostPassedQuestion">No data yet</strong>
+              </div>
+              <div class="failed-focus">
+                <span>Most failed question</span>
+                <strong id="mostFailedQuestion">No data yet</strong>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Question</th>
+                    <th>Topic</th>
+                    <th>Answered</th>
+                    <th>Correct</th>
+                    <th>Accuracy</th>
+                    <th>Correct answer</th>
+                  </tr>
+                </thead>
+                <tbody id="questionRows"></tbody>
+              </table>
+            </div>
+          </section>
+          <section>
+            <h3>All Submissions</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Cluster Office</th>
+                    <th>Score</th>
+                    <th>Time</th>
+                    <th>Submitted</th>
+                  </tr>
+                </thead>
+                <tbody id="attemptRows"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <template id="emptyLeaderboard">
+      <li class="empty">No attempts yet.</li>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
