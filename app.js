@@ -52,7 +52,7 @@ function getQuestionById(id) {
   return state.questions.find((question) => question.id === id);
 }
 
-function weeklyQuestions(forceNew = false, focusQuestionId = null) {
+function weeklyQuestions(forceNew = false) {
   const week = currentWeekKey();
   const sets = readWeeklySets();
   const hasValidSet =
@@ -63,8 +63,6 @@ function weeklyQuestions(forceNew = false, focusQuestionId = null) {
 
   if (!hasValidSet) {
     const picked = [];
-    if (focusQuestionId && getQuestionById(focusQuestionId)) picked.push(getQuestionById(focusQuestionId));
-    const used = new Set(picked.map((question) => question.id));
     selectDiverseQuestions().forEach((question) => {
       if (picked.length < CONFIG.questionsPerQuiz && !used.has(question.id)) {
         picked.push(question);
@@ -146,28 +144,31 @@ function shuffle(items) {
 }
 
 function selectDiverseQuestions() {
-  const byTopic = new Map();
-  shuffle(state.questions).forEach((question) => {
-    if (!byTopic.has(question.topic)) byTopic.set(question.topic, []);
-    byTopic.get(question.topic).push(question);
-  });
+  function selectDiverseQuestions() {
+  const requiredTopics = [
+    "Flooding",
+    "EMS",
+    "MCI",
+    "HAZMAT",
+    "SAF"
+  ];
 
   const picked = [];
-  shuffle([...byTopic.keys()]).forEach((topic) => {
-    if (picked.length < CONFIG.questionsPerQuiz) picked.push(byTopic.get(topic).shift());
+
+  requiredTopics.forEach((topic) => {
+    const questions = shuffle(
+      state.questions.filter((q) => q.topic === topic)
+    );
+
+    if (questions.length) {
+      picked.push({
+        ...questions[0],
+        options: shuffle(questions[0].options)
+      });
+    }
   });
 
-  if (picked.length < CONFIG.questionsPerQuiz) {
-    const used = new Set(picked.map((question) => question.id));
-    shuffle(state.questions).forEach((question) => {
-      if (picked.length < CONFIG.questionsPerQuiz && !used.has(question.id)) picked.push(question);
-    });
-  }
-
-  return picked.map((question) => ({
-    ...question,
-    options: shuffle(question.options),
-  }));
+  return picked;
 }
 
 function publicQuizUrl() {
@@ -586,39 +587,76 @@ function bindEvents() {
     $("#copyPublicLink").textContent = "Copied";
     setTimeout(() => ($("#copyPublicLink").textContent = "Copy Public Link"), 1300);
   });
-  $("#participantForm").addEventListener("submit", (event) => {
-    event.preventDefault();
-    startQuiz({
-      fullName: $("#fullName").value.trim(),
-      clusterOffice: $("#clusterOffice").value.trim(),
-    });
+ $("#participantForm").addEventListener("submit", (event) => {
+
+  event.preventDefault();
+
+  const fullName = $("#fullName").value.trim();
+
+  if (alreadySubmitted(fullName)) {
+
+    alert(
+      "You have already completed this week's RCAT Quiz."
+    );
+
+    return;
+  }
+
+  startQuiz({
+    fullName,
+    clusterOffice: $("#clusterOffice").value.trim()
   });
-  $("#adminLogin").addEventListener("submit", (event) => {
-    event.preventDefault();
-    if ($("#adminCode").value === CONFIG.adminCode) {
-      sessionStorage.setItem("rcatAdmin", "true");
-      renderAdmin();
-    } else {
-      $("#adminCode").setCustomValidity("Use the admin access code.");
-      $("#adminCode").reportValidity();
-      $("#adminCode").setCustomValidity("");
+});
+ $("#adminLogin").addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const email = $("#adminEmail").value.trim();
+  const password = $("#adminPassword").value;
+
+  const success = await adminLogin(email, password);
+
+  if (success) {
+    sessionStorage.setItem("rcatAdmin", "true");
+    renderAdmin();
+  } else {
+    alert("Invalid email or password.");
+  }
+});
+
+async function adminLogin(email, password) {
+  const admins = [
+    {
+      email: "admin1@example.com",
+      password: "RCAT2026"
+    },
+    {
+      email: "admin2@example.com",
+      password: "RCAT2026"
     }
+  ];
+
+  return admins.some(
+    (admin) =>
+      admin.email === email &&
+      admin.password === password
+  );
+}
   });
   $("#downloadCsv").addEventListener("click", downloadCsv);
   $("#resetWeek").addEventListener("click", () => {
-    if (!confirm("Reset this week's participant submissions and generate a new weekly question set?")) return;
-    const focusQuestionId = mostFailedQuestionId(readAttempts());
-    writeAttempts([]);
-    writeActiveSessions([]);
-    weeklyQuestions(true, focusQuestionId);
-    renderHome();
-    renderReports();
-  });
-  window.addEventListener("beforeunload", clearActiveSession);
-  window.addEventListener("hashchange", () => setRoute(location.hash.replace("#", "") || "home"));
-  setInterval(() => {
-    if (state.route === "admin" && sessionStorage.getItem("rcatAdmin") === "true") renderReports();
-  }, 5000);
+
+  if (!confirm(
+    "Reset this week's participant submissions and generate a new weekly question set?"
+  )) return;
+
+  writeAttempts([]);
+  writeActiveSessions([]);
+
+  weeklyQuestions(true);
+
+  renderHome();
+  renderReports();
+});
 }
 
 async function init() {
