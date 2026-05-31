@@ -607,40 +607,16 @@ function bindEvents() {
     clusterOffice: $("#clusterOffice").value.trim()
   });
 });
- $("#adminLogin").addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const email = $("#adminEmail").value.trim();
-  const password = $("#adminPassword").value;
-
-  const success = await adminLogin(email, password);
-
-  if (success) {
-    sessionStorage.setItem("rcatAdmin", "true");
-    renderAdmin();
-  } else {
-    alert("Invalid email or password.");
-  }
-});
-
-async function adminLogin(email, password) {
-  const admins = [
-    {
-      email: "admin1@example.com",
-      password: "RCAT2026"
-    },
-    {
-      email: "admin2@example.com",
-      password: "RCAT2026"
+  $("#adminLogin").addEventListener("submit", (event) => {
+    event.preventDefault();
+    if ($("#adminCode").value === CONFIG.adminCode) {
+      sessionStorage.setItem("rcatAdmin", "true");
+      renderAdmin();
+    } else {
+      $("#adminCode").setCustomValidity("Use the admin access code.");
+      $("#adminCode").reportValidity();
+      $("#adminCode").setCustomValidity("");
     }
-  ];
-
-  return admins.some(
-    (admin) =>
-      admin.email === email &&
-      admin.password === password
-  );
-}
   });
   $("#downloadCsv").addEventListener("click", downloadCsv);
   $("#resetWeek").addEventListener("click", () => {
