@@ -1,6 +1,6 @@
 const CONFIG = {
   questionsPerQuiz: 5,
-  secondsPerQuestion: 45,
+  secondsPerQuestion: 40,
   adminCode: "RCAT2026",
   storageKey: "rcat-weekly-attempts",
   activeStorageKey: "rcat-active-participants",
@@ -63,22 +63,24 @@ function weeklyQuestions(forceNew = false) {
 
   if (!hasValidSet) {
     const picked = [];
-    selectDiverseQuestions().forEach((question) => {
-      if (picked.length < CONFIG.questionsPerQuiz && !used.has(question.id)) {
-        picked.push(question);
-        used.add(question.id);
-      }
-    });
-    if (picked.length < CONFIG.questionsPerQuiz) {
-      shuffle(state.questions).forEach((question) => {
-        if (picked.length < CONFIG.questionsPerQuiz && !used.has(question.id)) picked.push(question);
-      });
+    const candidates = selectDiverseQuestions();
+
+    for (const q of candidates) {
+      if (picked.length < CONFIG.questionsPerQuiz) picked.push(q.id);
     }
-    sets[week] = picked.map((question) => question.id);
+
+    // Fill up if fewer than required
+    const remaining = shuffle(state.questions.filter((q) => !picked.includes(q.id)));
+    for (const q of remaining) {
+      if (picked.length >= CONFIG.questionsPerQuiz) break;
+      picked.push(q.id);
+    }
+
+    sets[week] = picked.slice(0, CONFIG.questionsPerQuiz);
     writeWeeklySets(sets);
   }
 
-  return sets[week].map(getQuestionById).filter(Boolean);
+  return (sets[week] || []).map(getQuestionById).filter(Boolean);
 }
 
 function readActiveSessions() {
@@ -116,7 +118,7 @@ function touchActiveSession(status = "answering") {
 function clearActiveSession() {
   if (!state.sessionId) return;
   writeActiveSessions(activeSessions().filter((session) => session.id !== state.sessionId));
-  clearInterval(state.activeHeartbeatId);
+  if (state.activeHeartbeatId) clearInterval(state.activeHeartbeatId);
   state.activeHeartbeatId = null;
 }
 
@@ -127,7 +129,7 @@ function writeAttempts(attempts) {
 }
 
 function rankedAttempts() {
-  return readAttempts().sort((a, b) => {
+  return readAttempts().slice().sort((a, b) => {
     if (b.score !== a.score) return b.score - a.score;
     if (a.completionTime !== b.completionTime) return a.completionTime - b.completionTime;
     return new Date(a.completedAt) - new Date(b.completedAt);
@@ -144,31 +146,22 @@ function shuffle(items) {
 }
 
 function selectDiverseQuestions() {
-  function selectDiverseQuestions() {
-  const requiredTopics = [
-    "Flooding",
-    "EMS",
-    "MCI",
-    "HAZMAT",
-    "SAF"
-  ];
-
+  const requiredTopics = ["Flooding", "EMS", "MCI", "HAZMAT", "SAF"];
   const picked = [];
 
-  requiredTopics.forEach((topic) => {
-    const questions = shuffle(
-      state.questions.filter((q) => q.topic === topic)
-    );
+  for (const topic of requiredTopics) {
+    const pool = shuffle(state.questions.filter((q) => q.topic === topic));
+    if (pool.length) picked.push(pool[0]);
+  }
 
-    if (questions.length) {
-      picked.push({
-        ...questions[0],
-        options: shuffle(questions[0].options)
-      });
-    }
-  });
+  // If fewer than needed, add random remaining
+  const remaining = shuffle(state.questions.filter((q) => !picked.some((p) => p.id === q.id)));
+  for (const q of remaining) {
+    if (picked.length >= CONFIG.questionsPerQuiz) break;
+    picked.push(q);
+  }
 
-  return picked;
+  return picked.slice(0, CONFIG.questionsPerQuiz);
 }
 
 function publicQuizUrl() {
@@ -177,16 +170,15 @@ function publicQuizUrl() {
 }
 
 function setRoute(route) {
-  const publicOnly = route !== "admin";
-  route = publicOnly ? "quiz" : "admin";
-
-  state.route = route;
-  location.hash = route;
-  document.body.classList.toggle("public-quiz", route === "quiz");
+  const isAdmin = route === "admin";
+  const newRoute = isAdmin ? "admin" : "quiz";
+  state.route = newRoute;
+  location.hash = newRoute;
+  document.body.classList.toggle("public-quiz", newRoute === "quiz");
   $$(".view").forEach((view) => view.classList.remove("active"));
-  $(`#${route}View`)?.classList.add("active");
-  if (route === "quiz") resetQuizEntry();
-  if (route === "admin") renderAdmin();
+  $(`#${newRoute}View`)?.classList.add("active");
+  if (newRoute === "quiz") resetQuizEntry();
+  if (newRoute === "admin") renderAdmin();
 }
 
 function formatSeconds(value) {
@@ -195,35 +187,19 @@ function formatSeconds(value) {
 
 function renderLeaderboard(target, attempts = rankedAttempts().slice(0, 3)) {
   const list = $(target);
-  const empty = $("#emptyLeaderboard").content.cloneNode(true);
   list.innerHTML = "";
   if (!attempts.length) {
+    const empty = document.createElement("li");
+    empty.textContent = "No attempts yet";
     list.appendChild(empty);
     return;
   }
-  attempts.forEach((attempt) => {
-    const li = document.createElement("li");
-    li.innerHTML = `<span><strong>${attempt.fullName}</strong><br><small>${attempt.team || "Independent"}</small></span><span>${attempt.score}/5 · ${formatSeconds(attempt.completionTime)}</span>`;
-    list.appendChild(li);
-  });
-}
-
-function renderLeaderboard(target, attempts = rankedAttempts().slice(0, 3)) {
-  const list = $(target);
-  const empty = $("#emptyLeaderboard").content.cloneNode(true);
-  const medals = ["gold", "silver", "bronze"];
-  const medalLabels = ["Gold", "Silver", "Bronze"];
-  list.innerHTML = "";
-  if (!attempts.length) {
-    list.appendChild(empty);
-    return;
-  }
+  const medals = ["🥇", "🥈", "🥉"];
   attempts.forEach((attempt, index) => {
     const li = document.createElement("li");
-    const medal = index < 3 ? `<span class="medal ${medals[index]}">${index + 1}</span>` : "";
+    const medal = medals[index] || "";
     const office = attempt.clusterOffice || attempt.team || "Independent";
-    const label = medalLabels[index] || `#${index + 1}`;
-    li.innerHTML = `<span>${medal}<strong>${label} - ${attempt.fullName}</strong><br><small>${office}</small></span><span>${attempt.score}/5 - ${formatSeconds(attempt.completionTime)}</span>`;
+    li.textContent = `${medal} ${attempt.fullName} — ${office} — ${attempt.score}/5 · ${formatSeconds(attempt.completionTime)}`;
     list.appendChild(li);
   });
 }
@@ -241,43 +217,55 @@ function renderHome() {
 function startQuiz(participant) {
   state.participant = participant;
   state.sessionId = crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`;
-  state.activeQuestions = weeklyQuestions().map((question) => ({
-    ...question,
-    options: shuffle(question.options),
-  }));
+  // Build activeQuestions with keyed options and correctAnswer as a key (A,B,C...)
+  state.activeQuestions = weeklyQuestions().map((question) => {
+    const opts = shuffle(question.options || []);
+    const keyed = opts.map((text, i) => ({ key: String.fromCharCode(65 + i), text }));
+    let correctKey = null;
+    if (question.correctAnswer) {
+      // correctAnswer may be text or a key
+      const idx = keyed.findIndex((o) => o.text === question.correctAnswer || o.key === question.correctAnswer);
+      correctKey = idx >= 0 ? keyed[idx].key : null;
+    }
+    return {
+      ...question,
+      options: keyed,
+      correctAnswer: correctKey,
+    };
+  });
   state.currentIndex = 0;
   state.answers = [];
   state.quizStartedAt = Date.now();
-  $("#participantForm").classList.add("hidden");
-  $("#resultPanel").classList.add("hidden");
-  $("#questionPanel").classList.remove("hidden");
+  $("#participantForm")?.classList.add("hidden");
+  $("#resultPanel")?.classList.add("hidden");
+  $("#questionPanel")?.classList.remove("hidden");
   touchActiveSession();
-  clearInterval(state.activeHeartbeatId);
+  if (state.activeHeartbeatId) clearInterval(state.activeHeartbeatId);
   state.activeHeartbeatId = setInterval(() => touchActiveSession(), 5000);
   showQuestion();
 }
 
 function resetQuizEntry() {
-  clearInterval(state.timerId);
+  if (state.timerId) clearInterval(state.timerId);
   clearActiveSession();
   state.participant = null;
   state.activeQuestions = [];
   state.currentIndex = 0;
   state.answers = [];
-  $("#participantForm").reset();
-  $("#participantForm").classList.remove("hidden");
-  $("#questionPanel").classList.add("hidden");
-  $("#resultPanel").classList.add("hidden");
+  $("#participantForm")?.reset();
+  $("#participantForm")?.classList.remove("hidden");
+  $("#questionPanel")?.classList.add("hidden");
+  $("#resultPanel")?.classList.add("hidden");
 }
 
 function showQuestion() {
-  clearInterval(state.timerId);
+  if (state.timerId) clearInterval(state.timerId);
   const question = state.activeQuestions[state.currentIndex];
   state.secondsLeft = CONFIG.secondsPerQuestion;
   state.questionStartedAt = Date.now();
   $("#progressText").textContent = `Question ${state.currentIndex + 1} of ${CONFIG.questionsPerQuiz}`;
-  $("#topicPill").textContent = question.topic;
-  $("#questionText").textContent = question.question;
+  $("#topicPill").textContent = question.topic || "";
+  $("#questionText").textContent = question.question || question.text || "";
   $("#progressBar").style.width = `${(state.currentIndex / CONFIG.questionsPerQuiz) * 100}%`;
   renderAnswerButtons(question);
   touchActiveSession();
@@ -289,12 +277,20 @@ function tickTimer() {
   const elapsed = (Date.now() - state.questionStartedAt) / 1000;
   state.secondsLeft = Math.max(0, CONFIG.secondsPerQuestion - elapsed);
   $("#timer").textContent = Math.ceil(state.secondsLeft);
-  if (state.secondsLeft <= 0) submitAnswer(null);
+  if (state.secondsLeft <= 0) {
+    // timed out
+    if (state.timerId) {
+      clearInterval(state.timerId);
+      state.timerId = null;
+    }
+    submitAnswer(null);
+  }
 }
 
 function renderAnswerButtons(question) {
-  const container = $("#answerButtons");
+  const container = $("#answers");
   container.innerHTML = "";
+  if (!question || !Array.isArray(question.options)) return;
   question.options.forEach((option) => {
     const button = document.createElement("button");
     button.type = "button";
@@ -305,21 +301,22 @@ function renderAnswerButtons(question) {
 }
 
 function submitAnswer(selectedAnswer) {
-  clearInterval(state.timerId);
+  if (state.timerId) {
+    clearInterval(state.timerId);
+    state.timerId = null;
+  }
   const question = state.activeQuestions[state.currentIndex];
-  const responseTime = Math.min(
-    CONFIG.secondsPerQuestion,
-    (Date.now() - state.questionStartedAt) / 1000
-  );
+  const responseTime = Math.min(CONFIG.secondsPerQuestion, (Date.now() - state.questionStartedAt) / 1000);
+  const isCorrect = selectedAnswer && question.correctAnswer ? selectedAnswer === question.correctAnswer : false;
   state.answers.push({
     questionId: question.id,
     topic: question.topic,
-    question: question.question,
+    question: question.question || question.text,
     selectedAnswer,
     correctAnswer: question.correctAnswer,
-    isCorrect: selectedAnswer === question.correctAnswer,
+    isCorrect,
     responseTime,
-    explanation: question.explanation,
+    explanation: question.explanation || "",
   });
 
   state.currentIndex += 1;
@@ -349,8 +346,8 @@ function finishQuiz() {
 }
 
 function renderResult(attempt) {
-  $("#questionPanel").classList.add("hidden");
-  $("#resultPanel").classList.remove("hidden");
+  $("#questionPanel")?.classList.add("hidden");
+  $("#resultPanel")?.classList.remove("hidden");
   $("#resultTitle").textContent = `${attempt.fullName}, you scored ${attempt.score}/5`;
   $("#resultDetail").textContent = `Completed in ${formatSeconds(attempt.completionTime)}. The weekly ranking uses score first, then fastest completion time.`;
   const review = $("#reviewList");
@@ -359,10 +356,10 @@ function renderResult(attempt) {
     const item = document.createElement("div");
     item.className = "review-item";
     item.innerHTML = `
-      <strong class="${answer.isCorrect ? "correct" : "wrong"}">Q${index + 1}: ${answer.isCorrect ? "Correct" : "Incorrect"}</strong>
-      <p>${answer.question}</p>
-      <small>Your answer: ${answer.selectedAnswer || "Timed out"} · Correct answer: ${answer.correctAnswer}</small>
-      <p>${answer.explanation}</p>
+      <strong>Q${index + 1}: ${answer.isCorrect ? "Correct" : "Incorrect"}</strong>
+      <div>${answer.question}</div>
+      <div>Your answer: ${answer.selectedAnswer || "Timed out"} · Correct answer: ${answer.correctAnswer}</div>
+      <div>${answer.explanation || ""}</div>
     `;
     review.appendChild(item);
   });
@@ -371,8 +368,8 @@ function renderResult(attempt) {
 
 function renderAdmin() {
   if (sessionStorage.getItem("rcatAdmin") === "true") {
-    $("#adminGate").classList.add("hidden");
-    $("#adminDashboard").classList.remove("hidden");
+    $("#adminGate")?.classList.add("hidden");
+    $("#adminDashboard")?.classList.remove("hidden");
     renderReports();
   }
 }
@@ -380,9 +377,7 @@ function renderAdmin() {
 function renderReports() {
   const attempts = rankedAttempts();
   const fastest = attempts.length ? Math.min(...attempts.map((attempt) => attempt.completionTime)) : 0;
-  const average = attempts.length
-    ? attempts.reduce((sum, attempt) => sum + attempt.score, 0) / attempts.length
-    : 0;
+  const average = attempts.length ? attempts.reduce((sum, attempt) => sum + attempt.score, 0) / attempts.length : 0;
   $("#adminAttempts").textContent = attempts.length;
   $("#activeParticipants").textContent = activeSessions().length;
   $("#averageScore").textContent = average.toFixed(1);
@@ -397,8 +392,12 @@ function renderReports() {
 }
 
 function correctAnswerText(question) {
-  const option = question.options.find((item) => item.key === question.correctAnswer);
-  return option ? `${question.correctAnswer}. ${option.text}` : question.correctAnswer;
+  // If correctAnswer is a key (A/B/...), map to text; otherwise return as-is
+  if (Array.isArray(question.options)) {
+    const opt = question.options.find((o) => o.key === question.correctAnswer || o.text === question.correctAnswer);
+    return opt ? `${opt.key}. ${opt.text}` : question.correctAnswer;
+  }
+  return question.correctAnswer;
 }
 
 function renderWeeklyQuestions() {
@@ -406,11 +405,8 @@ function renderWeeklyQuestions() {
   rows.innerHTML = "";
   weeklyQuestions().forEach((question) => {
     const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${question.question}</td>
-      <td>${question.topic}</td>
-      <td>${correctAnswerText(question)}</td>
-    `;
+    const qText = question.question || question.text || "";
+    tr.innerHTML = `<td>${qText}</td><td>${question.topic || ""}</td><td>${correctAnswerText(question)}</td>`;
     rows.appendChild(tr);
   });
 }
@@ -424,36 +420,17 @@ function renderOfficeReport(attempts) {
   const report = $("#officeReport");
   report.innerHTML = "";
   if (!officeStats.size) {
-    report.innerHTML = `<p class="empty">Office participation appears after the first submission.</p>`;
+    report.innerHTML = `Office participation appears after the first submission.`;
     return;
   }
-  const max = Math.max(...officeStats.values());
   [...officeStats.entries()]
     .sort((a, b) => b[1] - a[1])
     .forEach(([office, total]) => {
       const row = document.createElement("div");
       row.className = "topic-row";
-      row.innerHTML = `<strong>${office}</strong><div class="topic-bar"><span style="width:${Math.round((total / max) * 100)}%"></span></div><span>${total}</span>`;
+      row.innerHTML = `<strong>${office}</strong><div>${total}</div>`;
       report.appendChild(row);
     });
-}
-
-function mostFailedQuestionId(attempts) {
-  const stats = new Map();
-  attempts.flatMap((attempt) => attempt.answers).forEach((answer) => {
-    const current = stats.get(answer.questionId) || { total: 0, failed: 0 };
-    current.total += 1;
-    current.failed += answer.isCorrect ? 0 : 1;
-    stats.set(answer.questionId, current);
-  });
-  return [...stats.entries()]
-    .filter(([, item]) => item.total > 0)
-    .sort((a, b) => {
-      const aRate = a[1].failed / a[1].total;
-      const bRate = b[1].failed / b[1].total;
-      if (bRate !== aRate) return bRate - aRate;
-      return b[1].total - a[1].total;
-    })[0]?.[0];
 }
 
 function renderTopicReport(attempts) {
@@ -467,7 +444,7 @@ function renderTopicReport(attempts) {
   const report = $("#topicReport");
   report.innerHTML = "";
   if (!topicStats.size) {
-    report.innerHTML = `<p class="empty">Topic performance appears after the first submission.</p>`;
+    report.innerHTML = `Topic performance appears after the first submission.`;
     return;
   }
   [...topicStats.entries()]
@@ -476,7 +453,7 @@ function renderTopicReport(attempts) {
       const accuracy = Math.round((stats.correct / stats.total) * 100);
       const row = document.createElement("div");
       row.className = "topic-row";
-      row.innerHTML = `<strong>${topic}</strong><div class="topic-bar"><span style="width:${accuracy}%"></span></div><span>${accuracy}%</span>`;
+      row.innerHTML = `<strong>${topic}</strong><div>${accuracy}%</div>`;
       report.appendChild(row);
     });
 }
@@ -508,13 +485,13 @@ function renderQuestionReport(attempts) {
     ? `${passed[0].question} (${Math.round((passed[0].correct / passed[0].total) * 100)}% correct)`
     : "No data yet";
   $("#mostFailedQuestion").textContent = failed[0]
-    ? `Use next week: ${failed[0].question} (${Math.round(((failed[0].total - failed[0].correct) / failed[0].total) * 100)}% failed)`
+    ? `${failed[0].question} (${Math.round(((failed[0].total - failed[0].correct) / failed[0].total) * 100)}% failed)`
     : "No data yet";
 
   const rows = $("#questionRows");
   rows.innerHTML = "";
   if (!answered.length) {
-    rows.innerHTML = `<tr><td colspan="6">Question-level performance appears after the first completed quiz.</td></tr>`;
+    rows.innerHTML = `Question-level performance appears after the first completed quiz.`;
     return;
   }
   answered
@@ -522,14 +499,7 @@ function renderQuestionReport(attempts) {
     .forEach((question) => {
       const accuracy = Math.round((question.correct / question.total) * 100);
       const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${question.question}</td>
-        <td>${question.topic}</td>
-        <td>${question.total}</td>
-        <td>${question.correct}</td>
-        <td>${accuracy}%</td>
-        <td>${correctAnswerText(question)}</td>
-      `;
+      tr.innerHTML = `<td>${question.question}</td><td>${question.topic}</td><td>${question.total}</td><td>${question.correct}</td><td>${accuracy}%</td><td>${correctAnswerText(question)}</td>`;
       rows.appendChild(tr);
     });
 }
@@ -538,19 +508,13 @@ function renderAttemptRows(attempts) {
   const rows = $("#attemptRows");
   rows.innerHTML = "";
   if (!attempts.length) {
-    rows.innerHTML = `<tr><td colspan="5">No submissions yet.</td></tr>`;
+    rows.innerHTML = `No submissions yet.`;
     return;
   }
   attempts.forEach((attempt) => {
     const office = attempt.clusterOffice || attempt.team || "-";
     const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${attempt.fullName}</td>
-      <td>${office}</td>
-      <td>${attempt.score}/5</td>
-      <td>${formatSeconds(attempt.completionTime)}</td>
-      <td>${new Date(attempt.completedAt).toLocaleString()}</td>
-    `;
+    tr.innerHTML = `<td>${attempt.fullName}</td><td>${office}</td><td>${attempt.score}/5</td><td>${formatSeconds(attempt.completionTime)}</td><td>${new Date(attempt.completedAt).toLocaleString()}</td>`;
     rows.appendChild(tr);
   });
 }
@@ -582,32 +546,26 @@ function bindEvents() {
   $$("[data-route]").forEach((button) => {
     button.addEventListener("click", () => setRoute(button.dataset.route));
   });
-  $("#copyPublicLink").addEventListener("click", async () => {
+  $("#copyPublicLink")?.addEventListener("click", async () => {
     await navigator.clipboard.writeText(publicQuizUrl());
     $("#copyPublicLink").textContent = "Copied";
     setTimeout(() => ($("#copyPublicLink").textContent = "Copy Public Link"), 1300);
   });
- $("#participantForm").addEventListener("submit", (event) => {
 
-  event.preventDefault();
-
-  const fullName = $("#fullName").value.trim();
-
-  if (alreadySubmitted(fullName)) {
-
-    alert(
-      "You have already completed this week's RCAT Quiz."
-    );
-
-    return;
-  }
-
-  startQuiz({
-    fullName,
-    clusterOffice: $("#clusterOffice").value.trim()
+  $("#participantForm")?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const fullName = $("#fullName").value.trim();
+    if (alreadySubmitted && alreadySubmitted(fullName)) {
+      alert("You have already completed this week's RCAT Quiz.");
+      return;
+    }
+    startQuiz({
+      fullName,
+      clusterOffice: $("#clusterOffice").value.trim(),
+    });
   });
-});
-  $("#adminLogin").addEventListener("submit", (event) => {
+
+  $("#adminLogin")?.addEventListener("submit", (event) => {
     event.preventDefault();
     if ($("#adminCode").value === CONFIG.adminCode) {
       sessionStorage.setItem("rcatAdmin", "true");
@@ -618,21 +576,16 @@ function bindEvents() {
       $("#adminCode").setCustomValidity("");
     }
   });
-  $("#downloadCsv").addEventListener("click", downloadCsv);
-  $("#resetWeek").addEventListener("click", () => {
 
-  if (!confirm(
-    "Reset this week's participant submissions and generate a new weekly question set?"
-  )) return;
-
-  writeAttempts([]);
-  writeActiveSessions([]);
-
-  weeklyQuestions(true);
-
-  renderHome();
-  renderReports();
-});
+  $("#downloadCsv")?.addEventListener("click", downloadCsv);
+  $("#resetWeek")?.addEventListener("click", () => {
+    if (!confirm("Reset this week's participant submissions and generate a new weekly question set?")) return;
+    writeAttempts([]);
+    writeActiveSessions([]);
+    weeklyQuestions(true);
+    renderHome();
+    renderReports();
+  });
 }
 
 async function init() {
@@ -644,5 +597,5 @@ async function init() {
 }
 
 init().catch((error) => {
-  document.body.innerHTML = `<main><h1>Unable to load quiz</h1><p>${error.message}</p></main>`;
+  document.body.innerHTML = `Unable to load quiz: ${error.message}`;
 });
